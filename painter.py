@@ -129,7 +129,7 @@ class Window(QMainWindow):
                 self.trianglePoints.append(event.pos())
                 if len(self.trianglePoints) == 3:
                     self.drawTriangle()
-                    self.triangle = False
+                    self.triangle = True
             else:
                 self.drawing = True
                 self.lastPoint = event.pos()
@@ -144,7 +144,7 @@ class Window(QMainWindow):
         painter.drawLine(self.trianglePoints[1], self.trianglePoints[2])
         painter.drawLine(self.trianglePoints[2], self.trianglePoints[0])
         self.update()
-        self.triangle = False
+        self.triangle = True
 
     def toggleTriangle(self):
         self.triangle = not self.triangle
@@ -161,6 +161,7 @@ class Window(QMainWindow):
             painter.drawLine(self.lastPoint, event.pos())
             self.lastPoint = event.pos()
             self.update()
+
 
     def mouseReleaseEvent(self, event):
         if event.button == Qt.LeftButton:
