@@ -1,6 +1,4 @@
 import sys
-
-from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QMenu, QMenuBar, QAction, \
     QFileDialog
 from PyQt5.QtGui import QPainter, QColor, QFont, QBrush, QIcon, QImage, QPainter, QPen
