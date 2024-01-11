@@ -1,7 +1,8 @@
 import sys
 
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QMenu, QMenuBar, QAction, QFileDialog
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QMenu, QMenuBar, QAction, \
+    QFileDialog
 from PyQt5.QtGui import QPainter, QColor, QFont, QBrush, QIcon, QImage, QPainter, QPen
 from PyQt5.QtCore import Qt, QPoint
 
@@ -139,7 +140,8 @@ class Window(QMainWindow):
         if self.eraser:
             painter.setPen(QPen(Qt.white, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
         else:
-            painter.setPen(QPen(self.brushColor, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+            painter.setPen(
+                QPen(self.brushColor, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
         painter.drawLine(self.trianglePoints[0], self.trianglePoints[1])
         painter.drawLine(self.trianglePoints[1], self.trianglePoints[2])
         painter.drawLine(self.trianglePoints[2], self.trianglePoints[0])
@@ -155,13 +157,14 @@ class Window(QMainWindow):
         if event.buttons() & Qt.LeftButton & self.drawing:
             painter = QPainter(self.image)
             if self.eraser:
-                painter.setPen(QPen(Qt.white, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+                painter.setPen(
+                    QPen(Qt.white, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
             else:
-                painter.setPen(QPen(self.brushColor, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+                painter.setPen(
+                    QPen(self.brushColor, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
             painter.drawLine(self.lastPoint, event.pos())
             self.lastPoint = event.pos()
             self.update()
-
 
     def mouseReleaseEvent(self, event):
         if event.button == Qt.LeftButton:
@@ -174,9 +177,11 @@ class Window(QMainWindow):
         if self.triangle:
             painter = QPainter(self)
             if self.eraser:
-                painter.setPen(QPen(Qt.white, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+                painter.setPen(
+                    QPen(Qt.white, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
             else:
-                painter.setPen(QPen(self.brushColor, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+                painter.setPen(
+                    QPen(self.brushColor, self.brushSize, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
             if len(self.trianglePoints) == 2:
                 painter.drawLine(self.trianglePoints[0], self.trianglePoints[1])
             elif len(self.trianglePoints) == 3:
@@ -185,11 +190,12 @@ class Window(QMainWindow):
                 painter.drawLine(self.trianglePoints[2], self.trianglePoints[0])
 
     def save(self):
-        filepath = QFileDialog.getSaveFileName(self, 'Save image', '',
-                                               'PNG(*.png);;JPEG(*.jpg *.jpeg);; ALL Files(*.*)')
-        if filepath == '':
+        filePath, _ = QFileDialog.getSaveFileName(self, "Save Image", "",
+                                                  "PNG(*.png);;JPEG(*.jpg *.jpeg);;All Files(*.*) ")
+
+        if filePath == "":
             return
-        self.image.save(filepath)
+        self.image.save(filePath)
 
     def clear(self):
         self.image.fill(Qt.white)
@@ -248,8 +254,3 @@ if __name__ == '__main__':
     wnd = Window()
     wnd.show()
     sys.exit(app.exec())
-
-
-
-
-
